@@ -17,5 +17,3 @@ createClient(scriptURL.toString()).ready.then(
     registerServiceWorker();
   }
 );
-
-
