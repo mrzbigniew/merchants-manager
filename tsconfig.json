@@ -3,8 +3,8 @@
     "baseUrl": ".",
     "outDir": "build/dist",
     "module": "es2015",
-    "target": "es5",
-    "lib": ["es6", "dom"],
+    "target": "es2015",
+    "lib": ["es2017", "dom"],
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",
@@ -17,7 +17,24 @@
     "importHelpers": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "paths": {
+      "@componnets/*": [
+        "src/components/*"
+      ],
+      "@models/*": [
+        "src/models/*"
+      ],
+      "@mocks/*": [
+        "src/mocks/*"
+      ],
+      "@api/*": [
+        "src/api/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ]
+    }
   },
   "exclude": [
     "node_modules",
