@@ -1,0 +1,52 @@
+.pager {
+  display: grid;
+  grid-template-areas: "bb b i f ff";
+  grid-template-rows: auto;
+  grid-template-columns: auto auto auto auto auto;
+  grid-column-gap: 10px;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  list-style: none;
+
+  &__input {
+    padding: 5px 10px;
+    color: #333;
+    border: 1px solid #eee;
+    text-align: center;
+    &,  
+    &:hover,
+    &:focus {
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -webkit-user-select: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+      }
+    }
+  }
+
+  &__item {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    &--nav {
+      width: 30px;
+      height: 30px;
+      margin: 0px 5px;
+      cursor: pointer;
+      color: dodgerblue;
+
+      &:hover {
+        background-color: #eee;
+      }
+    }
+
+    &--input {}
+  }
+}

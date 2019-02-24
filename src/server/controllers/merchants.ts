@@ -3,18 +3,20 @@ import * as uuidv1 from 'uuid/v1';
 
 import { mock as merchantsMock } from '@mocks/merchants';
 import { IMerchant } from '@models/IMerchant';
-
-interface IRequestQueryData {
-  skip?: number;
-  take?: number;
-};
+import { IFetchMerchantsResponse } from '@models/IFetchMerchantsResponse';
 
 let merchants = merchantsMock;
 
 export default (router: MockerRouter) => {
   router.get('/merchants', (req, res) => {
-    const { skip = 0, take = 10 } = req.query as IRequestQueryData;
-    res.json(merchants.slice(skip, skip + 1 + take));
+    const { skip = 0, take = 9 } = req.query;
+    const data = merchants.slice(+skip, (+skip) + (+take));
+    res.json({
+      merchants: data,
+      skip: +skip,
+      take: +take,
+      total: merchants.length
+    } as IFetchMerchantsResponse);
   });
 
   router.get('/merchants/:id', (req, res) => {

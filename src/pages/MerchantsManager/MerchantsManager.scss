@@ -1,0 +1,9 @@
+.merchants__manager {
+  display: grid;
+  grid-template-areas: "pager"
+                       "itemsList";
+  grid-template-columns: 1fr;
+  grid-template-rows: 60px 1fr;
+  height: 100%;
+  width: 100%;
+}
