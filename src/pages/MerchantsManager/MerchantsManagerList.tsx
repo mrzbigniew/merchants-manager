@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 
 import { IStoreState } from '@models/IStoreState';
 import StoreDispatcher from '@models/StoreDispatcher';
-import Section from '@components/Section/Section';
 import Card from '@components/Card/Card';
 
 import { fetchMerchants } from './MerchantsManagerActions';
+import MerchantCardExpanded from './MerchantCardExpanded';
+import MerchantCardCollapsed from './MerchantCardCollapsed';
 
 import './MerchantsManagerList.scss';
 
@@ -16,24 +17,42 @@ export interface IMerchantsManagerListProps {
   loadMerchants: () => void;
 }
 
-class MerchantsManagerList extends React.Component<IMerchantsManagerListProps>{
+export interface IMerchantsManagerListState {
+  expanded: IMerchant[];
+}
+
+class MerchantsManagerList extends React.Component<IMerchantsManagerListProps, IMerchantsManagerListState>{
+  public isExpanded(item: IMerchant): boolean {
+    return this.state.expanded.includes(item)
+  }
+
   public componentDidMount() {
     this.props.loadMerchants();
   }
 
+  public componentWillReceiveProps() {
+    this.setState({
+      expanded: []
+    });
+  }
+
   public render() {
     return (
-      <Section className="merchants__list">
+      <div className="merchants">
         {
           this.props.merchants.map(
             item => (
-              <Card key={item.id}>
-                {item.firsName}
+              <Card key={item.id} className={this.isExpanded(item) ? 'expanded' : 'collapsed'}>
+                {
+                  this.isExpanded(item)
+                  ? <MerchantCardExpanded key={item.id} merchant={item} />
+                  : <MerchantCardCollapsed merchant={item} />
+                }
               </Card>
             )
           )
         }
-      </Section>
+      </div>
     );
   };
 }

@@ -1,0 +1,79 @@
+.mcc {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 10px 1fr 10px;
+  grid-template-rows: 10px auto 1fr 10px;
+  grid-template-areas: ". . ."
+                       ". mcct ."
+                       ". mccb ."
+                       ". . ."
+                       ;
+  &__title {
+    grid-area: mcct;
+    display: grid;
+    width: 100%;
+    grid-template-areas: "avatar . mcctt"
+                         "avatar . mccte"
+                         "avatar . mcctp"
+    ;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: 100px 10px 1fr;
+  }
+  &__email {
+    grid-area: mccte;
+    text-align: left;
+    font-size: 12px;
+    &--link {
+      color: #999;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  &__phone {
+    grid-area: mcctp;
+    font-size: 12px;
+  }
+  &__header {
+    grid-area: mcctt;
+    margin: 0;
+    padding: 0;
+    font-size: 22px;
+    line-height: 1.5;
+    display: grid;
+    grid-template-areas: "mccts mccctt";
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+    grid-column-gap: 5px;
+    justify-content: flex-start;
+    align-items: center;
+    color: #0d8ae6;
+    &--text {
+      grid-area: mccctt;
+    }
+  }
+  &__avatar {
+    grid-area: avatar;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    color: #777;
+    transition: all ease-in-out 200ms;
+  }
+  &__star {
+    grid-area: mccts;
+    font-size: 16px;
+    margin: 5px;
+    &--premium {
+      color: gold;
+    }
+  }
+  &__body {
+    grid-area: mccb;
+  }
+}

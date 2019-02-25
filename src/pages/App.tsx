@@ -5,6 +5,7 @@ import Header from '@components/Header/Header';
 import Logo from '@components/Logo/Logo';
 import Container from '@components/Container/Container';
 import Footer from '@components/Footer/Footer';
+import Main from '@components/Main/Main';
 
 import MerchantManager from './MerchantsManager/MerchantsManager';
 
@@ -16,13 +17,13 @@ const App = () => {
       <Header>
         <Logo label="Merchants manager" />
       </Header>
-      <Container className="body">
+      <Main className="main">
         <Router>
           <Switch>
             <Route exact={true} path="/" component={MerchantManager} />
           </Switch>
         </Router>
-      </Container>
+      </Main>
       <Footer />
     </Container>
   )

@@ -1,0 +1,20 @@
+.btn {
+  display: inline-block;
+  text-align: center;
+  width: auto;
+  box-shadow: none;
+  background-color: transparent;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  padding: 0;
+  cursor: pointer;
+  font-size: 1em;
+  line-height: 1.5;
+  &--default {
+    background-color: #eee;
+    &:hover {
+      background-color: #dedede;
+    }
+  }
+}

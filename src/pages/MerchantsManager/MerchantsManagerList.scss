@@ -1,18 +1,40 @@
 .merchants {
-  &__list {
-    grid-area: itemsList;
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    align-content: space-around;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    .card {
+  grid-area: itemsList;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  .card {
+    &.collapsed {
       display: inline-flex;
-      width: 30%;
-      height: 30%;
+      width: 380px;
+      height: 250px;
+      display: inline-flex;
+      cursor: pointer;
+      transition: all ease-in-out 400ms;
+      will-change: auto;
+      animation: card 1s ease-in;
+      &:hover {
+        transform: scale(1.1);
+      }
     }
+  }
+}
+
+@keyframes card {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }

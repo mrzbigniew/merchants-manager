@@ -4,11 +4,13 @@ import './Card.scss';
 
 export interface ICardProps {
   children: React.ReactNode;
+  className?: string;
 }
 
-const Card = ({ children }: ICardProps) => {
+const Card = ({ children, className }: ICardProps) => {
+  const classNames = ['card', className];
   return (
-    <section className="card">
+    <section className={classNames.join(' ')}>
       {children}
     </section>
   );
