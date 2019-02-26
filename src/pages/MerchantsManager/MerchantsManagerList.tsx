@@ -6,8 +6,7 @@ import { IStoreState } from '@models/IStoreState';
 import StoreDispatcher from '@models/StoreDispatcher';
 import Card from '@components/Card/Card';
 
-import { fetchMerchants } from './MerchantsManagerActions';
-import MerchantCardExpanded from './MerchantCardExpanded';
+import { fetchMerchants, deleteMerchantActionFactory, editMerchantActionFactory } from './MerchantsManagerActions';
 import MerchantCardCollapsed from './MerchantCardCollapsed';
 
 import './MerchantsManagerList.scss';
@@ -15,6 +14,8 @@ import './MerchantsManagerList.scss';
 export interface IMerchantsManagerListProps {
   merchants: IMerchant[];
   loadMerchants: () => void;
+  deleteMerchant: (merchant: IMerchant) => void;
+  editMerchant: (merchant: IMerchant) => void;
 }
 
 export interface IMerchantsManagerListState {
@@ -43,11 +44,7 @@ class MerchantsManagerList extends React.Component<IMerchantsManagerListProps, I
           this.props.merchants.map(
             item => (
               <Card key={item.id} className={this.isExpanded(item) ? 'expanded' : 'collapsed'}>
-                {
-                  this.isExpanded(item)
-                  ? <MerchantCardExpanded key={item.id} merchant={item} />
-                  : <MerchantCardCollapsed merchant={item} />
-                }
+                <MerchantCardCollapsed deleteMerchant={this.props.deleteMerchant} editMerchant={this.props.editMerchant} merchant={item} />
               </Card>
             )
           )
@@ -64,6 +61,12 @@ const mapStateToProps = (state: IStoreState): Partial<IMerchantsManagerListProps
 const mapDispatchTpProps = (dispatch: StoreDispatcher): Partial<IMerchantsManagerListProps> => ({
   loadMerchants() {
     dispatch(fetchMerchants())
+  },
+  deleteMerchant(merchant: IMerchant) {
+    dispatch(deleteMerchantActionFactory(merchant))
+  },
+  editMerchant(merchant: IMerchant) {
+    dispatch(editMerchantActionFactory(merchant))
   }
 });
 

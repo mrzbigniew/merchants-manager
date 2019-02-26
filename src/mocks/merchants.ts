@@ -57,7 +57,7 @@ export const generateBid = (): IBid => {
   return {
     amount: randomNumber({ min: 2000, max: 25000 }),
     carTitle: carTitlesMock[randomNumber({ min: 1, max: carTitlesMock.length }) - 1],
-    created: generateRandomDate().toJSON(),
+    created: generateRandomDate(),
     id: uuidv1()
   } as IBid
 }
@@ -97,6 +97,6 @@ const generateMerchant = (): IMerchant => {
   }
 };
 
-export const mock: IMerchant[] = new Array(200).fill(null).map(
+export let mock: IMerchant[] = new Array(200).fill(null).map(
   () => generateMerchant()
 );

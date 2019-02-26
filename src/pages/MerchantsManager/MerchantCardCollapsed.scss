@@ -3,12 +3,12 @@
   width: 100%;
   height: 100%;
   grid-template-columns: 10px 1fr 10px;
-  grid-template-rows: 10px auto 1fr 10px;
-  grid-template-areas: ". . ."
+  grid-template-rows: 10px auto 1fr;
+  grid-template-areas: ". . mcca"
                        ". mcct ."
-                       ". mccb ."
-                       ". . ."
+                       "mccb mccb mccb"
                        ;
+  position: relative;
   &__title {
     grid-area: mcct;
     display: grid;
@@ -19,6 +19,35 @@
     ;
     grid-template-rows: auto auto auto;
     grid-template-columns: 100px 10px 1fr;
+  }
+  &__action {
+    grid-area: mcca;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    &--container {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      grid-auto-flow: dense;
+      justify-items: flex-end;
+    }
+    &--item {
+      font-size: 14px;
+      display: flex;
+      width: 100%;
+      justify-content: flex-end;
+      padding: 2px 10px;
+      &:hover {
+        background-color: #eee;
+      }
+    }
+    &--delete {
+      color: red;
+    }
   }
   &__email {
     grid-area: mccte;
@@ -73,7 +102,84 @@
       color: gold;
     }
   }
-  &__body {
+  &__bids {
     grid-area: mccb;
+    display: grid;
+    grid-template-areas: ". . ."
+                         ". mccbh ."
+                         "mccbg mccbg mccbg"
+    ;
+    grid-template-columns: 10px 1fr 10px;
+    grid-template-rows: 10px auto 1fr;
+  }
+  &__bids__header {
+    grid-area: mccbh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    padding: 0;
+  }
+  &__grid {
+    grid-area: mccbg;
+    display: grid;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    grid-template-areas: "mccbgh"
+                         "mccbgc";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    &--header {
+      grid-area: mccbgh;
+    }
+    &--content {
+      grid-area: mccbgc;
+      will-change: contents;
+    }
+    &--nav {
+      display: inline-flex;
+      margin: 0px 5px;
+      color: cornflowerblue;
+      cursor: pointer;
+      will-change: auto;
+      transition: all ease-in-out 200ms;
+      &:hover {
+        transform: scale(2);
+      }
+    }
+    &--wrapper {
+      display: contents;
+    }
+    &--template {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.5fr;
+      grid-auto-flow: row;
+    }
+    &--cel, &--celh {
+      font-size: 12px;
+      display: inline-flex;
+      padding-left: 3px;
+      padding-right: 3px;
+    }
+    &--cel {
+      justify-content: flex-start;
+    }
+    &--celh {
+      border-bottom: 1px solid #eee;
+      justify-content: flex-start;
+    }
+    &--empty {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      padding: 0px 20px;
+      color: #555;
+    }
   }
 }

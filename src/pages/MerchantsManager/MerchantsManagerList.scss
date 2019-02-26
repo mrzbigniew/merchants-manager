@@ -17,12 +17,11 @@
       width: 380px;
       height: 250px;
       display: inline-flex;
-      cursor: pointer;
       transition: all ease-in-out 400ms;
       will-change: auto;
       animation: card 1s ease-in;
       &:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
       }
     }
   }

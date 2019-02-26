@@ -8,12 +8,18 @@ import {
   FetchMerchantsSuccessActionFactory,
   FetchMerchantsErrorActionFactory,
   MerchantsListPageChangeFactory,
-  SetMerchantsListPageSizeActionFactory
+  SetMerchantsListPageSizeActionFactory,
+  DeleteMerchantActionFactory,
+  DeleteMerchantSuccessActionFactory,
+  DeleteMerchantBeginActionFactory,
+  DeleteMerchantErrorActionFactory,
+  EditMerchantActionFactory
 } from '@models/IMerchantsAction';
 import { IFetchMerchantsResponse } from '@models/IFetchMerchantsResponse';
 import StoreDispatcher from '@models/StoreDispatcher';
-import { apiFetchMerchants } from '@api/merchants';
+import { apiFetchMerchants, apiDeleteMerchant } from '@api/merchants';
 import { IStoreState } from '@models/IStoreState';
+import { IMerchant } from '@models/IMerchant';
 
 export const fetchMerchantsBeginAction: FetchMerchantsBeginActionFactory = (): IFetchMerchantsBeginAction => ({
   type: MerchantsActionType.fetchBegin
@@ -57,4 +63,43 @@ export const merchantsListPageChange: MerchantsListPageChangeFactory = (pageNumb
     take
   }));
   return dispatch(fetchMerchants())
+}
+
+export const deleteMerchantSuccessActionFactory: DeleteMerchantSuccessActionFactory = () => ({
+  type: MerchantsActionType.deleteSuccess
+});
+
+export const deleteMerchantBeginActionFactory: DeleteMerchantBeginActionFactory = () => ({
+  type: MerchantsActionType.deleteBegin
+});
+
+export const deleteMerchantErrorActionFactory: DeleteMerchantErrorActionFactory = (error: Error) => ({
+  type: MerchantsActionType.deleteError,
+  error
+});
+
+export const deleteMerchantActionFactory: DeleteMerchantActionFactory = (merchant: IMerchant) => async (dispatch: StoreDispatcher): Promise<void> => {
+  try {
+    dispatch(deleteMerchantBeginActionFactory());
+    return await apiDeleteMerchant(merchant).then(
+      res => {
+        dispatch(deleteMerchantSuccessActionFactory());
+        return dispatch(fetchMerchants())
+      }
+    )
+  } catch(error) {
+    return dispatch(deleteMerchantErrorActionFactory(error));
+  }
+};
+
+export const editMerchantActionFactory: EditMerchantActionFactory = (merchant: IMerchant) => (dispatch: StoreDispatcher) => {
+  dispatch(fetchMerchants())
+}
+
+export const addMerchantActionFactory = () => {
+  return undefined;
+}
+
+export const saveMerchantActionFactory = () => async (): Promise<void> => {
+  return undefined;
 }

@@ -1,0 +1,45 @@
+.action__toggle {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  color: #0d8ae6;
+  overflow: visible;
+  font-size: 1em;
+  line-height: 1.5;
+
+  &--icon {
+    transition: all ease-in-out 200ms;
+  }
+
+  &:hover {
+    color: #1d8cf6;
+  }
+
+  &--container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translateY(100%);
+    animation: toggle;
+    animation-duration: 200ms;
+    animation-timing-function: ease-in;
+    background-color: white;
+    border-radius: 1px;
+    border: 1px solid #efefef;
+    box-shadow: 1px 1px 5px 0px #eee;
+  }
+}
+
+@keyframes toggle {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+
+  to {
+    height: auto;
+    opacity: 1;
+  }
+}
