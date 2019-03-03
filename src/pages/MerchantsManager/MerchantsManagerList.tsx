@@ -22,36 +22,25 @@ export interface IMerchantsManagerListState {
   expanded: IMerchant[];
 }
 
-class MerchantsManagerList extends React.Component<IMerchantsManagerListProps, IMerchantsManagerListState>{
-  public isExpanded(item: IMerchant): boolean {
-    return this.state.expanded.includes(item)
-  }
+const MerchantsManagerList = (props: IMerchantsManagerListProps) => {
+  React.useEffect(() => {
+    props.loadMerchants()
+  }, []);
 
-  public componentDidMount() {
-    this.props.loadMerchants();
-  }
-
-  public componentWillReceiveProps() {
-    this.setState({
-      expanded: []
-    });
-  }
-
-  public render() {
-    return (
-      <div className="merchants">
-        {
-          this.props.merchants.map(
-            item => (
-              <Card key={item.id} className={this.isExpanded(item) ? 'expanded' : 'collapsed'}>
-                <MerchantCardCollapsed deleteMerchant={this.props.deleteMerchant} editMerchant={this.props.editMerchant} merchant={item} />
-              </Card>
-            )
+  return (
+    <div className="merchants">
+      {
+        props.merchants.map(
+          item => (
+            <Card key={item.id} className='collapsed'>
+              <MerchantCardCollapsed deleteMerchant={props.deleteMerchant} editMerchant={props.editMerchant} merchant={item} />
+            </Card>
           )
-        }
-      </div>
-    );
-  };
+        )
+      }
+    </div>
+  );
+
 }
 
 const mapStateToProps = (state: IStoreState): Partial<IMerchantsManagerListProps> => ({

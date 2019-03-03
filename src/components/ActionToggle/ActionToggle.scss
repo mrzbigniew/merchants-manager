@@ -13,8 +13,13 @@
     transition: all ease-in-out 200ms;
   }
 
+  $parent: &;
+
   &:hover {
     color: #1d8cf6;
+    #{$parent}--icon {
+      transform: scale(1.5)
+    }
   }
 
   &--container {
